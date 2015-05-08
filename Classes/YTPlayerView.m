@@ -624,10 +624,10 @@ NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.double
   NSMutableDictionary *playerParams = [[NSMutableDictionary alloc] init];
   [playerParams addEntriesFromDictionary:additionalPlayerParams];
   if (![playerParams objectForKey:@"height"]) {
-    [playerParams setValue:@"100%" forKey:@"height"];
+    [playerParams setValue:@(self.bounds.size.height) forKey:@"height"];
   }
   if (![playerParams objectForKey:@"width"]) {
-    [playerParams setValue:@"100%" forKey:@"width"];
+    [playerParams setValue:@(self.bounds.size.width) forKey:@"width"];
   }
   if (![playerParams objectForKey:@"origin"]) {
     self.originURL = [NSURL URLWithString:@"about:blank"];
@@ -774,6 +774,7 @@ NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.double
   webView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
   webView.scrollView.scrollEnabled = NO;
   webView.scrollView.bounces = NO;
+
   return webView;
 }
 
