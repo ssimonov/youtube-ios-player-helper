@@ -71,6 +71,10 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
 
 @implementation YTPlayerView
 
+- (void)dealloc {
+    self.webView.delegate = nil;
+}
+
 - (BOOL)loadWithVideoId:(NSString *)videoId {
   return [self loadWithVideoId:videoId playerVars:nil];
 }
@@ -704,6 +708,7 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
 
   // Remove the existing webView to reset any state
   [self.webView removeFromSuperview];
+  self.webView.delegate = nil;
   _webView = [self createNewWebView];
   [self addSubview:self.webView];
 
